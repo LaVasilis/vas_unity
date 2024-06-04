@@ -4000,7 +4000,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-56422
+  m_Name: pb_Mesh23240
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5053,6 +5053,7 @@ GameObject:
   - component: {fileID: 1059550239}
   - component: {fileID: 1059550237}
   - component: {fileID: 1059550238}
+  - component: {fileID: 1059550240}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -5126,6 +5127,18 @@ Transform:
   m_Father: {fileID: 41030888}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1059550240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059550236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0380f48acad6dbe42a77188711e8bdc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1086858682
 Mesh:
   m_ObjectHideFlags: 0
@@ -8318,6 +8331,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03ca75e399f361442b652e6f3517d6ac, type: 3}
+--- !u!1 &1281272486 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5752903652249767289, guid: c902d08e7d8506843b5244c6320063b3, type: 3}
+  m_PrefabInstance: {fileID: 1992144505}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1281272495
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281272486}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.3952272, y: 0.94426906, z: 0.93393314}
+  m_Center: {x: 0, y: 0.47213447, z: -0.029250368}
+--- !u!114 &1281272496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281272486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88cf13fab8edade418bec21ca3a8961f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1313405267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9809,6 +9852,7 @@ GameObject:
   - component: {fileID: 1841652512}
   - component: {fileID: 1841652511}
   - component: {fileID: 1841652510}
+  - component: {fileID: 1841652516}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -9929,13 +9973,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 74
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1841652516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841652509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd49988fd49b8148a667ad97996243a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1893094237
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23344
+  m_Name: pb_Mesh23354
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10334,7 +10390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1993110992123739677, guid: c902d08e7d8506843b5244c6320063b3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -67.82476
+      value: -67.821
       objectReference: {fileID: 0}
     - target: {fileID: 1993110992123739677, guid: c902d08e7d8506843b5244c6320063b3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10342,7 +10398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1993110992123739677, guid: c902d08e7d8506843b5244c6320063b3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.211269
+      value: -12.076
       objectReference: {fileID: 0}
     - target: {fileID: 1993110992123739677, guid: c902d08e7d8506843b5244c6320063b3, type: 3}
       propertyPath: m_LocalRotation.w
