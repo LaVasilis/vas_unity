@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Controller : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Controller : MonoBehaviour
     public Rigidbody rb;
     public Transform head;
     public Camera camera;
+    public couchInteractable couch;
 
     [Header("Configurations")]
     public float walkSpeed;
@@ -18,21 +20,32 @@ public class Controller : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked; 
+        Cursor.lockState = CursorLockMode.None; 
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * 2f);
+        
+       if ( !EventSystem.current.IsPointerOverGameObject())
+        {
+            // Allow rotation if not interacting with UI
+            transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * 2f);
+        }
+
+       
+        
     }
 
      void LateUpdate() {
        
-        Vector3 e = head.eulerAngles;
-        e.x -= Input.GetAxis("Mouse Y") * 2f;   
-        e.x = RestrictAngle(e.x, -85f, 85f);    
-        head.eulerAngles = e;
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            Vector3 e = head.eulerAngles;
+            e.x -= Input.GetAxis("Mouse Y") * 2f;
+            e.x = RestrictAngle(e.x, -85f, 85f);
+            head.eulerAngles = e;
+        }
     }
 
 
@@ -62,4 +75,12 @@ public class Controller : MonoBehaviour
 
         return angle;
     }
+
+
+    private bool isMouseOverUI(){
+        return EventSystem.current.IsPointerOverGameObject();
+
+    }
+
+
 }
