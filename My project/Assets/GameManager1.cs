@@ -9,6 +9,10 @@ public class GameManager1 : MonoBehaviour
 {
 
      public GameObject Panel;
+     public GameObject gameOverText;
+     public GameObject CorrectText;
+     public GameObject FalseText;
+     public GameObject FText;
 
     public Question[] questions;
     private static List<Question> unansweredQuestions;
@@ -46,6 +50,8 @@ public class GameManager1 : MonoBehaviour
 
         unansweredQuestions.Remove(currentQuestion);
         yield return new WaitForSeconds (timeBetweenQuestions);
+        FText.SetActive(false);
+        CorrectText.SetActive(false);
 
         if (unansweredQuestions.Count > 0) {
         GetCurrentQuestion();
@@ -53,21 +59,29 @@ public class GameManager1 : MonoBehaviour
         Debug.Log("No more questions left!");
         Panel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked; 
-        
+        gameOverText.SetActive(true);
+        yield return new WaitForSeconds (4);
+        gameOverText.SetActive(false);
     }
 
 
 
     }
+    
 
 
     public void UserSelectTrue(){
 
         if(currentQuestion.isTrue){
             Debug.Log("Correct");
+            CorrectText.SetActive(true);
+            
         }else
         {
             Debug.Log("Wrong");
+            FText.SetActive(true);
+            
+            
         }
 
         StartCoroutine(TransitionToNextQuestion());
@@ -77,9 +91,11 @@ public class GameManager1 : MonoBehaviour
 
         if(currentQuestion.isTrue){
             Debug.Log("Wrong");
+            FText.SetActive(true);
         }else
         {
             Debug.Log("Correct");
+            CorrectText.SetActive(true);
         }
         StartCoroutine(TransitionToNextQuestion());
     }
