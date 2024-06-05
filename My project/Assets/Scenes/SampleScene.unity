@@ -1602,7 +1602,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 415922207}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1610,10 +1610,10 @@ RectTransform:
   m_Father: {fileID: 1802362647}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 259.7, y: -340.6}
-  m_SizeDelta: {x: -543.2, y: 142.4}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 259.7, y: -215.1}
+  m_SizeDelta: {x: 542.8, y: 393.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &415922209
 MonoBehaviour:
@@ -2295,6 +2295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e0101973c3a7a408182945f4b159d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Panel: {fileID: 1802362646}
   questions:
   - fact: Is important to stretch?
     isTrue: 1
@@ -2303,6 +2304,7 @@ MonoBehaviour:
   - fact: Do you need a warm up ?
     isTrue: 1
   factText: {fileID: 673508373}
+  timeBetweenQuestions: 1
 --- !u!114 &541011900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3317,7 +3319,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 717197184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.000025971}
+  m_LocalPosition: {x: 0, y: 0, z: -0.000009960666}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3325,11 +3327,11 @@ RectTransform:
   m_Father: {fileID: 1802362647}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 260.98, y: -214.93}
-  m_SizeDelta: {x: 522, y: 393.75}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -543.00214, y: -411.83005}
+  m_SizeDelta: {x: 525, y: 393.8}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &717197186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8675,7 +8677,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1801687248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00018899}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8683,9 +8685,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -31.2, y: 0}
-  m_SizeDelta: {x: 83.2, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 5.2008057, y: 197}
+  m_SizeDelta: {x: 10.401, y: 394}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!102 &1801687250
 TextMesh:
@@ -8798,13 +8800,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37
-  m_fontSizeBase: 37
+  m_fontSize: 47
+  m_fontSizeBase: 47
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -8865,7 +8867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1802362647
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9900,9 +9902,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 196.5}
+  m_SizeDelta: {x: 0, y: 393}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2061991561
 MonoBehaviour:
@@ -9924,7 +9926,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: False
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9951,13 +9953,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 47
+  m_fontSizeBase: 47
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -10127,6 +10129,7 @@ GameObject:
   - component: {fileID: 2131855722}
   - component: {fileID: 2131855721}
   - component: {fileID: 2131855720}
+  - component: {fileID: 2131855724}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -10216,6 +10219,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &2131855724
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131855719}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f4a2b08197fa88b40b6703e09acdce06, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &2144450111
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,16 +20,19 @@ public class Controller : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.None; 
+        Cursor.lockState = CursorLockMode.Locked; 
     }
 
     
     void Update()
-    {
+    {   
+        
+
         
        if ( !EventSystem.current.IsPointerOverGameObject())
         {
             // Allow rotation if not interacting with UI
+            
             transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * 2f);
         }
 

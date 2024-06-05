@@ -8,6 +8,7 @@ public class couchInteractable : MonoBehaviour
     
     public void Interact(){
         Panel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None; 
         Debug.Log("Quiz");
 
     }

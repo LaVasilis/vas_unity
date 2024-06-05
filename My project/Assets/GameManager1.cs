@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager1 : MonoBehaviour
 {
+
+     public GameObject Panel;
+
     public Question[] questions;
     private static List<Question> unansweredQuestions;
 
@@ -13,6 +17,9 @@ public class GameManager1 : MonoBehaviour
 
     [SerializeField]
     private Text factText;
+
+    [SerializeField]
+    private float timeBetweenQuestions = 1f;
 
     void Start()
     {
@@ -28,10 +35,28 @@ public class GameManager1 : MonoBehaviour
     void GetCurrentQuestion(){
         int randomQuestionIndex = Random.Range(0,unansweredQuestions.Count);
         currentQuestion = unansweredQuestions[randomQuestionIndex];
-
+        
         factText.text= currentQuestion.fact;
 
-        unansweredQuestions.RemoveAt(randomQuestionIndex);
+        
+
+    }
+
+    IEnumerator TransitionToNextQuestion(){
+
+        unansweredQuestions.Remove(currentQuestion);
+        yield return new WaitForSeconds (timeBetweenQuestions);
+
+        if (unansweredQuestions.Count > 0) {
+        GetCurrentQuestion();
+    } else {
+        Debug.Log("No more questions left!");
+        Panel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked; 
+        
+    }
+
+
 
     }
 
@@ -44,6 +69,8 @@ public class GameManager1 : MonoBehaviour
         {
             Debug.Log("Wrong");
         }
+
+        StartCoroutine(TransitionToNextQuestion());
     }
 
     public void UserSelectFalse(){
@@ -54,7 +81,9 @@ public class GameManager1 : MonoBehaviour
         {
             Debug.Log("Correct");
         }
+        StartCoroutine(TransitionToNextQuestion());
     }
+    
 
 
 
