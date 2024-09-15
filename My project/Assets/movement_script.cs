@@ -8,7 +8,7 @@ public class movement_script : MonoBehaviour
     public Rigidbody playerRigid;
     public float Walking_speed = 120f;
     public float Jogback_speed = 120f;
-    public float Olw_speed = 220f;
+    public float Olw_speed = 270f;
     public float Running_speed = 170f;
     public float Rotation_speed = 130f;
 

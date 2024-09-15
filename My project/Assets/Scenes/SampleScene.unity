@@ -4809,7 +4809,7 @@ MonoBehaviour:
   playerRigid: {fileID: 578677250}
   Walking_speed: 120
   Jogback_speed: 120
-  Olw_speed: 220
+  Olw_speed: 270
   Running_speed: 170
   Rotation_speed: 130
   playerTrans: {fileID: 578677254}
