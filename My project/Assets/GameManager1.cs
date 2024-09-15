@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class GameManager1 : MonoBehaviour
 {
 
@@ -13,7 +14,7 @@ public class GameManager1 : MonoBehaviour
      public GameObject CorrectText;
      public GameObject FalseText;
      public GameObject FText;
-
+    public static bool isInConversation = false;
     public Question[] questions;
     private static List<Question> unansweredQuestions;
 

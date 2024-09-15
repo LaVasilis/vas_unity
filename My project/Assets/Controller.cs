@@ -9,7 +9,7 @@ public class Controller : MonoBehaviour
     [Header("References")]
     public Rigidbody rb;
     public Transform head;
-    public Camera camera;
+    public Camera MainCamera;
     public couchInteractable couch;
 
     [Header("Configurations")]
