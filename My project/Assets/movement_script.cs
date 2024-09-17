@@ -16,9 +16,15 @@ public class movement_script : MonoBehaviour
     public Transform playerTrans;
 
     public GameObject Barbells;
+    public GameObject Treadmill;
+
     private bool isHoldingBarbell = false;
     private bool isNearBarbell = false;
-    public float interactionDistance = 2f;  // Distance within which the player can interact with the barbell
+
+    private bool isOnTreadmill = false;
+    private bool isNearTreadmill = false;
+
+    public float interactionDistance = 2f;  // Distance within which the player can interact with the barbell and treadmill
 
     public Text interactionText; // Reference to the UI Text
 
@@ -38,6 +44,13 @@ public class movement_script : MonoBehaviour
         {
             playerRigid.velocity = -transform.forward * Jogback_speed * Time.deltaTime;
         }
+
+        if (isOnTreadmill)
+        {
+            // Simulate the player moving on the treadmill
+            playerTrans.position = new Vector3(-53.08f, 5.037203f, -20.96f);
+            playerTrans.rotation = Quaternion.Euler(0f, -178.012f, 0f);
+        }
     }
 
     // Update is called once per frame
@@ -50,26 +63,36 @@ public class movement_script : MonoBehaviour
         bool isWalkingBackwards = animator.GetBool("isWalkingBackwards");
         bool runPressed = Input.GetKey("left shift");
 
-
         bool moveRightPressed = Input.GetKey("d");
         bool moveLeftPressed = Input.GetKey("a");
         bool isRunning = animator.GetBool("isRunning");
 
         bool isSquatting = animator.GetBool("isWalkingBackwards");
 
-        
+        bool treadmill = animator.GetBool("treadmill");
+
         // Check if the player is near the barbell
         float distanceToBarbell = Vector3.Distance(playerTrans.position, Barbells.transform.position);
         isNearBarbell = distanceToBarbell <= interactionDistance;
 
-        // Show the interaction text if the player is near the barbell, otherwise hide it
+        // Check if the player is near the treadmill
+        float distanceToTreadmill = Vector3.Distance(playerTrans.position, Treadmill.transform.position);
+        isNearTreadmill = distanceToTreadmill <= interactionDistance;
+
+        // Show the interaction text if the player is near an interactable object
         if (isNearBarbell && !isHoldingBarbell)
         {
-            interactionText.enabled = true; // Show "Press T" popup
+            interactionText.text = "Press T to pick up the barbell";
+            interactionText.enabled = true;
+        }
+        else if (isNearTreadmill && !isOnTreadmill)
+        {
+            interactionText.text = "Press T to use the treadmill";
+            interactionText.enabled = true;
         }
         else
         {
-            interactionText.enabled = false; // Hide the popup
+            interactionText.enabled = false;
         }
 
         if (!isWalking && forwardPressed)
@@ -141,6 +164,30 @@ public class movement_script : MonoBehaviour
         {
             DropBarbell();    // Optional: Drop or release the barbell
         }
+
+
+
+        if (!treadmill && interactPressed && isNearTreadmill)
+        {
+            // Trigger the treadmill animation
+            animator.SetBool("treadmill", true);
+            
+            isOnTreadmill = true; // Set player on treadmill
+            interactionText.enabled = false; // Hide interaction popup when using treadmill
+        }
+
+        if (treadmill && interactPressed && isOnTreadmill)
+        {
+            // Stop the treadmill animation if T is pressed again
+            animator.SetBool("treadmill", false);
+            isOnTreadmill = false;
+            playerTrans.position = new Vector3(-52.6663f, 4.9f, -19.6006f);
+            interactionText.enabled = false; // Hide interaction popup
+        }
+
+        
+        // Stop the treadmill if any movement keys are pressed while on the treadmill
+     
     }
 
     void PickUpBarbell()
@@ -155,11 +202,8 @@ public class movement_script : MonoBehaviour
         if (rightHand != null && leftHand != null)
         {
             Barbells.transform.SetParent(rightHand);
-            Barbells.transform.localPosition = new Vector3(0f, 0.1f, 0.1f);
+            Barbells.transform.localPosition = new Vector3(-0.3737501f, -0.05394529f, 0.1f);
             Barbells.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-
-            Vector3 handMidpoint = (rightHand.position + leftHand.position);
-            Barbells.transform.position = handMidpoint;
         }
         else
         {
@@ -175,7 +219,8 @@ public class movement_script : MonoBehaviour
         animator.SetBool("isSquatting", false);
         Barbells.transform.SetParent(null);
 
-        Vector3 dropPosition = playerTrans.position + new Vector3(0f, -0.5f, 1f);
+        Vector3 dropPosition = playerTrans.position + new Vector3(0f, -0.5f, -1f);
+        Barbells.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         Barbells.transform.position = dropPosition;
 
         Rigidbody rb = Barbells.GetComponent<Rigidbody>();
