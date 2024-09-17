@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; // Add this to access UI elements
 
 public class movement_script : MonoBehaviour
 {
@@ -16,8 +17,16 @@ public class movement_script : MonoBehaviour
 
     public GameObject Barbells;
     private bool isHoldingBarbell = false;
+    private bool isNearBarbell = false;
+    public float interactionDistance = 2f;  // Distance within which the player can interact with the barbell
 
+    public Text interactionText; // Reference to the UI Text
 
+    void Start()
+    {
+        // Make sure the interaction text is initially hidden
+        interactionText.enabled = false;
+    }
 
     void FixedUpdate()
     {
@@ -48,17 +57,33 @@ public class movement_script : MonoBehaviour
 
         bool isSquatting = animator.GetBool("isWalkingBackwards");
 
+        
+        // Check if the player is near the barbell
+        float distanceToBarbell = Vector3.Distance(playerTrans.position, Barbells.transform.position);
+        isNearBarbell = distanceToBarbell <= interactionDistance;
+
+        // Show the interaction text if the player is near the barbell, otherwise hide it
+        if (isNearBarbell && !isHoldingBarbell)
+        {
+            interactionText.enabled = true; // Show "Press T" popup
+        }
+        else
+        {
+            interactionText.enabled = false; // Hide the popup
+        }
+
         if (!isWalking && forwardPressed)
         {
-
             Walking_speed = Olw_speed;
-
             animator.SetBool("isWalking", true);
+            if (isHoldingBarbell)
+            {
+                DropBarbell();
+            }
         }
 
         if (isWalking && !forwardPressed)
         {
-
             animator.SetBool("isWalking", false);
         }
 
@@ -75,18 +100,14 @@ public class movement_script : MonoBehaviour
 
         if (!isRunning && (forwardPressed && runPressed))
         {
-
             Walking_speed = Walking_speed + Running_speed;
-            Debug.Log(Walking_speed);
             animator.SetBool("isRunning", true);
-
         }
 
         if (isRunning && (!forwardPressed || !runPressed))
         {
             Walking_speed = Olw_speed;
             animator.SetBool("isRunning", false);
-
         }
 
         if (moveLeftPressed && forwardPressed)
@@ -99,7 +120,6 @@ public class movement_script : MonoBehaviour
             playerTrans.Rotate(0, Rotation_speed * Time.deltaTime, 0);
         }
 
-
         if (moveLeftPressed && backwardsPressed)
         {
             playerTrans.Rotate(0, -Rotation_speed * Time.deltaTime, 0);
@@ -110,36 +130,23 @@ public class movement_script : MonoBehaviour
             playerTrans.Rotate(0, Rotation_speed * Time.deltaTime, 0);
         }
 
-
-        if (!isSquatting && interactPressed)
+        // Check if the player is near the barbell and presses T
+        if (!isSquatting && interactPressed && isNearBarbell)
         {
-            animator.SetBool("isSquatting", true);
-            if (!isHoldingBarbell)
-            {
-                PickUpBarbell();  // Start the squat animation with barbell
-            }
-            else
-            {
-                DropBarbell();    // Optional: Drop or release the barbell
-                animator.SetTrigger("idle");
-            }
+            animator.SetBool("isRunning", false);
+            PickUpBarbell();  // Start the squat animation with barbell
         }
 
-        
-
-        if (isSquatting && !interactPressed)
+        if (isSquatting && backwardsPressed && isHoldingBarbell)
         {
-            DropBarbell();
-            animator.SetBool("isSquatting", false);
+            DropBarbell();    // Optional: Drop or release the barbell
         }
-
-
     }
 
     void PickUpBarbell()
     {
         // Set the trigger in the Animator to start the squat animation
-        animator.SetTrigger("squat");
+        animator.SetBool("isSquatting", true);
 
         // Attach the barbell to the character's right hand (or both hands)
         Transform rightHand = transform.Find("player_model/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand");
@@ -147,47 +154,37 @@ public class movement_script : MonoBehaviour
 
         if (rightHand != null && leftHand != null)
         {
-            // Attach the barbell to the right hand (or a position between both hands)
-            Barbells.transform.SetParent(rightHand);  // Optionally, you can use a midpoint between both hands
+            Barbells.transform.SetParent(rightHand);
+            Barbells.transform.localPosition = new Vector3(0f, 0.1f, 0.1f);
+            Barbells.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
-            // Adjust the local position and rotation to align the barbell with the hands
-            Barbells.transform.localPosition = new Vector3(0f, 0.1f, 0.1f);  // Adjust based on the alignment of the hands
-            Barbells.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);  // Adjust rotation to fit the barbell correctly
-
-            // Optionally, you could calculate the midpoint between both hands and set the barbell there
-            Vector3 handMidpoint = (rightHand.position + leftHand.position) / 2;
+            Vector3 handMidpoint = (rightHand.position + leftHand.position);
             Barbells.transform.position = handMidpoint;
-
-            // Ensure the barbell follows the hand movement properly
-            Debug.Log("Barbell picked up and aligned with hands.");
         }
         else
         {
             Debug.LogError("Hand(s) not found!");
         }
 
-        isHoldingBarbell = true;  // Update state
-        
+        isHoldingBarbell = true;
+        interactionText.enabled = false; // Hide the popup after picking up the barbell
     }
-
 
     void DropBarbell()
     {
-        // Detach the barbell from the hand
-        Barbells.transform.SetParent(null);  // Unparent the barbell from the hand
+        animator.SetBool("isSquatting", false);
+        Barbells.transform.SetParent(null);
 
-        // Optionally, set the position of the barbell near the player's feet or a specific location (floor position)
-        Vector3 dropPosition = playerTrans.position + new Vector3(0f, -0.5f, 1f);  // Adjust as needed
-        Barbells.transform.position = dropPosition;  // Set it just above the floor so gravity can pull it down
+        Vector3 dropPosition = playerTrans.position + new Vector3(0f, -0.5f, 1f);
+        Barbells.transform.position = dropPosition;
 
-        // Enable physics for the barbell (gravity)
         Rigidbody rb = Barbells.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.isKinematic = false;  // Enable physics so the barbell can fall to the ground
-            rb.useGravity = true;    // Ensure gravity is enabled
+            rb.isKinematic = false;
+            rb.useGravity = true;
         }
 
-        isHoldingBarbell = false;  // Update state
+        isHoldingBarbell = false;
     }
 }
