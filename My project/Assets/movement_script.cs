@@ -17,12 +17,40 @@ public class movement_script : MonoBehaviour
 
     public GameObject Barbells;
     public GameObject Treadmill;
+    public GameObject matt;
+    public GameObject matt2;
+
+    public GameObject Dumbell_1;
+    public GameObject Dumbell_2;
+    public GameObject sumoObj;
+    public GameObject Bicycle;
+
+
 
     private bool isHoldingBarbell = false;
     private bool isNearBarbell = false;
 
+
+    private bool isHoldingsumoObj = false;
+    private bool isNearsumoObj = false;
+
+    
+
     private bool isOnTreadmill = false;
     private bool isNearTreadmill = false;
+
+
+    private bool isHoldingDumbell = false;
+    private bool isNearDumbell = false;
+
+    private bool isOnMatt = false;
+    private bool isNearMatt = false;
+
+    private bool isOnMatt2 = false;
+    private bool isNearMatt2 = false;
+
+    private bool isOnBicycle = false;
+    private bool isNearBicycle = false;
 
     public float interactionDistance = 2f;  // Distance within which the player can interact with the barbell and treadmill
 
@@ -32,6 +60,7 @@ public class movement_script : MonoBehaviour
     {
         // Make sure the interaction text is initially hidden
         interactionText.enabled = false;
+        
     }
 
     void FixedUpdate()
@@ -51,12 +80,34 @@ public class movement_script : MonoBehaviour
             playerTrans.position = new Vector3(-53.08f, 5.037203f, -20.96f);
             playerTrans.rotation = Quaternion.Euler(0f, -178.012f, 0f);
         }
+
+        if (isOnMatt)
+        {
+            // Simulate the player moving on the treadmill
+            playerTrans.position = new Vector3(-34.93f, 5.037203f, -14.75164f);
+            playerTrans.rotation = Quaternion.Euler(0f, -178.012f, 0f);
+        }
+
+        if (isOnMatt2)
+        {
+            // Simulate the player moving on the treadmill
+            playerTrans.position = new Vector3(-31.147f, 5.037203f, -13.656f);
+            playerTrans.rotation = Quaternion.Euler(0f, -178.012f, 0f);
+        }
+
+        if (isOnBicycle)
+        {
+            
+            playerTrans.position = new Vector3(-46.73f, 5.135f, -20.017f);
+            playerTrans.rotation = Quaternion.Euler(0f, -178.012f, 0f);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         bool forwardPressed = Input.GetKey("w");
+        bool cPressed = Input.GetKey("c");
         bool interactPressed = Input.GetKeyDown(KeyCode.T);
         bool backwardsPressed = Input.GetKey("s");
         bool isWalking = animator.GetBool("isWalking");
@@ -69,7 +120,17 @@ public class movement_script : MonoBehaviour
 
         bool isSquatting = animator.GetBool("isWalkingBackwards");
 
+        bool isCurling = animator.GetBool("isCurling");
+
         bool treadmill = animator.GetBool("treadmill");
+
+        bool isJumping = animator.GetBool("isJumping");
+
+        bool isPlanking = animator.GetBool("isPlanking");
+
+        
+        bool isSumo = animator.GetBool("isSumo");
+        bool isCycling = animator.GetBool("isCycling");
 
         // Check if the player is near the barbell
         float distanceToBarbell = Vector3.Distance(playerTrans.position, Barbells.transform.position);
@@ -78,6 +139,27 @@ public class movement_script : MonoBehaviour
         // Check if the player is near the treadmill
         float distanceToTreadmill = Vector3.Distance(playerTrans.position, Treadmill.transform.position);
         isNearTreadmill = distanceToTreadmill <= interactionDistance;
+
+        // Check if the player is near the treadmill
+        float distanceToDumbell = Vector3.Distance(playerTrans.position, Dumbell_1.transform.position);
+        isNearDumbell = distanceToDumbell <= interactionDistance;
+
+        float distanceToMatt = Vector3.Distance(playerTrans.position, matt.transform.position);
+        isNearMatt = distanceToMatt <= interactionDistance;
+
+
+        float distanceToMatt2 = Vector3.Distance(playerTrans.position, matt2.transform.position);
+        isNearMatt2 = distanceToMatt2 <= interactionDistance;
+
+
+        float distanceToSumoObj = Vector3.Distance(playerTrans.position, sumoObj.transform.position);
+        isNearsumoObj = distanceToSumoObj <= interactionDistance;
+
+        float distanceToBicycle = Vector3.Distance(playerTrans.position, Bicycle.transform.position);
+        isNearBicycle = distanceToBicycle <= interactionDistance;
+
+
+
 
         // Show the interaction text if the player is near an interactable object
         if (isNearBarbell && !isHoldingBarbell)
@@ -133,6 +215,12 @@ public class movement_script : MonoBehaviour
             animator.SetBool("isRunning", false);
         }
 
+
+
+
+
+
+
         if (moveLeftPressed && forwardPressed)
         {
             playerTrans.Rotate(0, -Rotation_speed * Time.deltaTime, 0);
@@ -166,17 +254,80 @@ public class movement_script : MonoBehaviour
         }
 
 
+        if (!isCurling && interactPressed && !isHoldingDumbell && isNearDumbell)
+        {
+            
+            PickUpDumbell();  // Start the squat animation with barbell
+        }
+
+        if (isCurling && (interactPressed || forwardPressed || backwardsPressed) && isHoldingDumbell)
+        {
+            DropDumbell();    // Optional: Drop or release the barbell
+        }
+
+     
+
+
+        if (!isSumo && interactPressed && !isHoldingsumoObj && isNearsumoObj)
+        {
+
+            PickUpSumoObj();  // Start the squat animation with barbell
+        }
+
+        if (isSumo && (interactPressed || forwardPressed || backwardsPressed) && isHoldingsumoObj)
+        {
+            DropSumoObj();    // Optional: Drop or release the barbell
+        }
+
+        if (!isJumping && interactPressed && isNearMatt)
+        {
+            // Trigger the treadmill animation
+            animator.SetBool("isJumping", true);
+
+            isOnMatt = true; // Set player on treadmill
+            interactionText.enabled = false; // Hide interaction popup when using treadmill
+        }
+
+        if (isJumping && (interactPressed || forwardPressed || backwardsPressed) && isOnMatt)
+        {
+            // Stop the treadmill animation if T is pressed again
+            animator.SetBool("isJumping", false);
+            isOnMatt = false;
+            playerTrans.position = new Vector3(-34.93f, 4.9f, -12.947f);
+            interactionText.enabled = false; // Hide interaction popup
+        }
+
+        if (!isPlanking && interactPressed && isNearMatt2)
+        {
+            // Trigger the treadmill animation
+            animator.SetBool("isPlanking", true);
+
+            isOnMatt2 = true; // Set player on treadmill
+            interactionText.enabled = false; // Hide interaction popup when using treadmill
+        }
+
+        if (isPlanking && (interactPressed || forwardPressed || backwardsPressed) && isOnMatt2)
+        {
+            // Stop the treadmill animation if T is pressed again
+            animator.SetBool("isPlanking", false);
+            isOnMatt2 = false;
+            playerTrans.position = new Vector3(-31.147f, 4.9f, -12.614f);
+            interactionText.enabled = false; // Hide interaction popup
+        }
+
+
+
 
         if (!treadmill && interactPressed && isNearTreadmill)
         {
             // Trigger the treadmill animation
             animator.SetBool("treadmill", true);
-            
+           
             isOnTreadmill = true; // Set player on treadmill
             interactionText.enabled = false; // Hide interaction popup when using treadmill
         }
 
-        if (treadmill && interactPressed && isOnTreadmill)
+        if (treadmill && (interactPressed || forwardPressed || backwardsPressed) && isOnTreadmill)
         {
             // Stop the treadmill animation if T is pressed again
             animator.SetBool("treadmill", false);
@@ -185,9 +336,142 @@ public class movement_script : MonoBehaviour
             interactionText.enabled = false; // Hide interaction popup
         }
 
+
+        if (!isCycling && interactPressed && isNearBicycle)
+        {
+            // Trigger the treadmill animation
+            animator.SetBool("isCycling", true);
+
+            isOnBicycle = true; // Set player on treadmill
+            interactionText.enabled = false; // Hide interaction popup when using treadmill
+        }
+
+        if (isCycling && (interactPressed || forwardPressed || backwardsPressed) && isOnBicycle)
+        {
+            // Stop the treadmill animation if T is pressed again
+            animator.SetBool("isCycling", false);
+            isOnBicycle = false;
+            playerTrans.position = new Vector3(-46.73f, 4.9f, -18.87f);
+            interactionText.enabled = false; // Hide interaction popup
+        }
+
+
+
+
+    }
+
+
+    
+
+
+    void PickUpSumoObj()
+    {
+        // Set the trigger in the Animator to start the squat animation
+        animator.SetBool("isSumo", true);
+
+        // Attach the barbell to the character's right hand (or both hands)
+        Transform rightHand = transform.Find("player_model/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand");
         
-        // Stop the treadmill if any movement keys are pressed while on the treadmill
-     
+
+        if (rightHand != null)
+        {
+            sumoObj.transform.SetParent(rightHand);
+            sumoObj.transform.localPosition = new Vector3(-0.0737501f, -0.00000000000001f, -0.04f);
+            sumoObj.transform.localRotation = Quaternion.Euler(180f, 0f, 0f);
+        }
+        else
+        {
+            Debug.LogError("Hand(s) not found!");
+        }
+
+        isHoldingsumoObj = true;
+        interactionText.enabled = false; // Hide the popup after picking up the barbell
+    }
+
+
+    void DropSumoObj()
+    {
+        animator.SetBool("isSumo", false);
+        sumoObj.transform.SetParent(null);
+
+        Vector3 dropPosition = playerTrans.position + new Vector3(0f, -0.7f, -1f);
+        sumoObj.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        sumoObj.transform.position = dropPosition;
+
+
+        
+
+        Rigidbody rb1 = sumoObj.GetComponent<Rigidbody>();
+       
+        if (rb1 != null)
+        {
+            rb1.isKinematic = false;
+            rb1.useGravity = true;
+
+           
+        }
+
+
+        isHoldingsumoObj = false;
+    }
+
+    void PickUpDumbell()
+    {
+        // Set the trigger in the Animator to start the squat animation
+        animator.SetBool("isCurling", true);
+
+        // Attach the barbell to the character's right hand (or both hands)
+        Transform rightHand = transform.Find("player_model/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand");
+        Transform leftHand = transform.Find("player_model/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:LeftShoulder/mixamorig:LeftArm/mixamorig:LeftForeArm/mixamorig:LeftHand");
+
+        if (rightHand != null && leftHand != null)
+        {
+            Dumbell_1.transform.SetParent(rightHand);
+            Dumbell_1.transform.localPosition = new Vector3(-0.0737501f, -0.004394529f, -0.04f);
+            Dumbell_1.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+            
+            Dumbell_2.transform.SetParent(leftHand);
+            Dumbell_2.transform.localPosition = new Vector3(-0.0737501f, -0.004394529f, 0.04f);
+            Dumbell_2.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+        else
+        {
+            Debug.LogError("Hand(s) not found!");
+        }
+
+        isHoldingDumbell = true;
+        interactionText.enabled = false; // Hide the popup after picking up the barbell
+    }
+
+
+    void DropDumbell()
+    {
+        animator.SetBool("isCurling", false);
+        Dumbell_1.transform.SetParent(null);
+        Dumbell_2.transform.SetParent(null);
+
+        Vector3 dropPosition = playerTrans.position + new Vector3(0f, -0.5f, -1f);
+        Dumbell_1.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        Dumbell_1.transform.position = dropPosition;
+
+
+        Vector3 dropPosition2 = playerTrans.position + new Vector3(0.6f, -0.5f, -1f);
+        Dumbell_2.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        Dumbell_2.transform.position = dropPosition2;
+
+        Rigidbody rb1 = Dumbell_1.GetComponent<Rigidbody>();
+        Rigidbody rb2 = Dumbell_2.GetComponent<Rigidbody>();
+        if (rb1 != null && rb2 != null)
+        {
+            rb1.isKinematic = false;
+            rb1.useGravity = true;
+
+            rb2.isKinematic = false;
+            rb2.useGravity = true;
+        }
+
+
+        isHoldingDumbell = false;
     }
 
     void PickUpBarbell()
