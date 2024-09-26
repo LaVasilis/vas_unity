@@ -159,6 +159,47 @@ public class movement_script : MonoBehaviour
         isNearBicycle = distanceToBicycle <= interactionDistance;
 
 
+        // Show interaction text for the nearest object
+        if (isNearBarbell && !isHoldingBarbell)
+        {
+            interactionText.text = "Press T to pick up the barbell";
+            interactionText.enabled = true;
+        }
+        else if (isNearTreadmill && !isOnTreadmill)
+        {
+            interactionText.text = "Press T to use the treadmill";
+            interactionText.enabled = true;
+        }
+        else if (isNearDumbell && !isHoldingDumbell)
+        {
+            interactionText.text = "Press T to pick up the dumbbells";
+            interactionText.enabled = true;
+        }
+        else if (isNearMatt && !isOnMatt)
+        {
+            interactionText.text = "Press T to jump";
+            interactionText.enabled = true;
+        }
+        else if (isNearMatt2 && !isOnMatt2)
+        {
+            interactionText.text = "Press T to plank";
+            interactionText.enabled = true;
+        }
+        else if (isNearsumoObj && !isHoldingsumoObj)
+        {
+            interactionText.text = "Press T to pick up the sumo object";
+            interactionText.enabled = true;
+        }
+        else if (isNearBicycle && !isOnBicycle)
+        {
+            interactionText.text = "Press T to use the bicycle";
+            interactionText.enabled = true;
+        }
+        else
+        {
+            // Hide the text if not near any interactable object
+            interactionText.enabled = false;
+        }
 
 
         // Show the interaction text if the player is near an interactable object
@@ -241,28 +282,28 @@ public class movement_script : MonoBehaviour
             playerTrans.Rotate(0, Rotation_speed * Time.deltaTime, 0);
         }
 
-        // Check if the player is near the barbell and presses T
-        if (!isSquatting && interactPressed && isNearBarbell)
+       
+        if (!isSquatting && interactPressed && isNearBarbell && !isHoldingBarbell)
         {
             animator.SetBool("isRunning", false);
-            PickUpBarbell();  // Start the squat animation with barbell
+            PickUpBarbell();  
         }
 
-        if (isSquatting && backwardsPressed && isHoldingBarbell)
+        if (isSquatting && (interactPressed || forwardPressed || backwardsPressed) && isHoldingBarbell)
         {
-            DropBarbell();    // Optional: Drop or release the barbell
+            DropBarbell();    
         }
 
 
         if (!isCurling && interactPressed && !isHoldingDumbell && isNearDumbell)
         {
             
-            PickUpDumbell();  // Start the squat animation with barbell
+            PickUpDumbell(); 
         }
 
         if (isCurling && (interactPressed || forwardPressed || backwardsPressed) && isHoldingDumbell)
         {
-            DropDumbell();    // Optional: Drop or release the barbell
+            DropDumbell();    
         }
 
      
@@ -394,7 +435,7 @@ public class movement_script : MonoBehaviour
         animator.SetBool("isSumo", false);
         sumoObj.transform.SetParent(null);
 
-        Vector3 dropPosition = playerTrans.position + new Vector3(0f, -0.7f, -1f);
+        Vector3 dropPosition = playerTrans.position + new Vector3(0f, -0.75f, -1f);
         sumoObj.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         sumoObj.transform.position = dropPosition;
 
