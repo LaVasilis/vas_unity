@@ -8,7 +8,10 @@ public class DataHandler : MonoBehaviour
 {
     public InputField foodTypeInput;
     public InputField quantityInput;
-  
+    //public InputField exerciseTypeInput;
+    //public InputField durationInput;
+    public Dropdown quantityDropdown;
+
 
     // Δημιουργούμε μια λίστα για να αποθηκεύσουμε τα δεδομένα
     private List<DietExerciseEntry> entries = new List<DietExerciseEntry>();
@@ -17,16 +20,20 @@ public class DataHandler : MonoBehaviour
     public void SaveEntry()
     {
         string foodType = foodTypeInput.text;
-        float quantity = float.Parse(quantityInput.text);
-        
 
-        // Δημιουργούμε μια νέα καταχώρηση
+        //string exerciseType = exerciseTypeInput.text;
+        //float duration = float.Parse(durationInput.text);
+
+
+        int quantity = int.Parse(quantityDropdown.options[quantityDropdown.value].text);
+
+        // Create a new entry
         DietExerciseEntry newEntry = new DietExerciseEntry(foodType, quantity);
 
-        // Προσθέτουμε την καταχώρηση στη λίστα
+        // Add entry to the list
         entries.Add(newEntry);
 
-        Debug.Log("Καταχώρηση αποθηκεύτηκε: " + foodType + ", " + quantity + ", "  + ", ");
+        Debug.Log("Entry saved: " + foodType + ", " + quantity);
     }
 
 
@@ -35,7 +42,23 @@ public class DataHandler : MonoBehaviour
         string json = JsonConvert.SerializeObject(entries, Formatting.Indented);
         File.WriteAllText(Application.persistentDataPath + "/dietExerciseData.json", json);
 
-        Debug.Log("Δεδομένα αποθηκεύτηκαν σε JSON: " + json);
+        Debug.Log("Data saved to JSON: " + json);
+    }
+
+    // Optional method to load data from JSON
+    public void LoadDataFromJson()
+    {
+        string filePath = Application.persistentDataPath + "/dietExerciseData.json";
+        if (File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            entries = JsonConvert.DeserializeObject<List<DietExerciseEntry>>(json);
+            Debug.Log("Data loaded from JSON.");
+        }
+        else
+        {
+            Debug.LogWarning("No saved data found.");
+        }
     }
 }
 
