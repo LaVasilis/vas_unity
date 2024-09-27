@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17287087, g: 0.21603319, b: 0.29799104, a: 1}
+  m_IndirectSpecularColor: {r: 0.17287108, g: 0.21603368, b: 0.29799175, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3316,7 +3316,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.7
+  m_Radius: 0.52
   m_Height: 1.3899893
   m_Direction: 1
   m_Center: {x: 0, y: 0.6619492, z: 0.000521034}
@@ -9452,7 +9452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2744165586320970824, guid: 03ca75e399f361442b652e6f3517d6ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -42.45
+      value: -41.128
       objectReference: {fileID: 0}
     - target: {fileID: 2744165586320970824, guid: 03ca75e399f361442b652e6f3517d6ac, type: 3}
       propertyPath: m_LocalPosition.y
@@ -14266,7 +14266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2744165586320970824, guid: 03ca75e399f361442b652e6f3517d6ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -46.71
+      value: -45.77
       objectReference: {fileID: 0}
     - target: {fileID: 2744165586320970824, guid: 03ca75e399f361442b652e6f3517d6ac, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15227,7 +15227,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.67
+  m_Radius: 0.54
   m_Height: 1.3899893
   m_Direction: 1
   m_Center: {x: 0, y: 0.6619492, z: 0.000521034}
@@ -17881,7 +17881,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.78937685
+  m_Radius: 0.73
   m_Height: 1.3899893
   m_Direction: 1
   m_Center: {x: 0, y: 0.6619492, z: 0.000521034}
@@ -23728,7 +23728,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23024
+  m_Name: pb_Mesh56072
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -24753,7 +24753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2744165586320970824, guid: 03ca75e399f361442b652e6f3517d6ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -44.73
+      value: -43.39
       objectReference: {fileID: 0}
     - target: {fileID: 2744165586320970824, guid: 03ca75e399f361442b652e6f3517d6ac, type: 3}
       propertyPath: m_LocalPosition.y
