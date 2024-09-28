@@ -25,7 +25,10 @@ public class movement_script : MonoBehaviour
     public GameObject sumoObj;
     public GameObject Bicycle;
     public couchInteractable couch;
+<<<<<<< Updated upstream
     
+=======
+>>>>>>> Stashed changes
 
 
 
