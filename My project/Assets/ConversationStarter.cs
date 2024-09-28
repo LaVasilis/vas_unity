@@ -31,10 +31,10 @@ public class ConversationStarter : MonoBehaviour
     private void OnConversationEnded()
     {
         // Lock the cursor again after the conversation ends
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false; // Hide the cursor again
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false; // Hide the cursor again
 
-        Debug.Log("Conversation ended, cursor locked");
+        //Debug.Log("Conversation ended, cursor locked");
 
         // Unsubscribe to prevent memory leaks or duplicate events
         ConversationManager.OnConversationEnded -= OnConversationEnded;
