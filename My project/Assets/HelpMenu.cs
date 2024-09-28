@@ -9,7 +9,7 @@ public class HelpMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if(Input.GetKeyDown(KeyCode.H)){
+         if(Input.GetKeyDown(KeyCode.Escape)){
 
             Cursor.lockState = CursorLockMode.None; 
             PanelHelp.SetActive(true);
