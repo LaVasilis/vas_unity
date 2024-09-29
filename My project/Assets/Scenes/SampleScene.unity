@@ -9613,6 +9613,18 @@ CapsuleCollider:
   m_Height: 1.3899893
   m_Direction: 1
   m_Center: {x: 0, y: 0.6619492, z: 0.000521034}
+--- !u!114 &675275788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675275780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceacdf29fb2d8b043ba52ea946164230, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &678577832
 GameObject:
   m_ObjectHideFlags: 0
@@ -17667,7 +17679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5300719671309677289, guid: 03ca75e399f361442b652e6f3517d6ac, type: 3}
       propertyPath: m_Name
-      value: Exercise Bike (6)
+      value: TerminateBike
       objectReference: {fileID: 0}
     - target: {fileID: 5368723390563368726, guid: 03ca75e399f361442b652e6f3517d6ac, type: 3}
       propertyPath: m_LocalPosition.x
