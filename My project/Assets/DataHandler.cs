@@ -34,13 +34,13 @@ public class DataHandler : MonoBehaviour
     private List<DietExerciseEntry> entries = new List<DietExerciseEntry>();
 
 
-    public Text entryDateText; // Reference to the UI Text
+    public Text entryDateText;
 
     public void DisplayEntryDate(DateTime entryDate)
     {
-        // Convert DateTime to string (you can format it as you like)
+        
         string formattedDate = entryDate.ToString("MMMM dd, yyyy hh:mm tt"); // Example: September 29, 2024 08:30 PM
-        // Assign the formatted date to the text component
+        
         entryDateText.text = "" + formattedDate;
     }
 
@@ -75,8 +75,8 @@ public class DataHandler : MonoBehaviour
 
         // Add the entry to the list
         entries.Add(newEntry);
+        DisplayEntryDate(newEntry.entryDate);
 
-       
 
         // Display the summary in another menu
         ShowSummary(totalCalories, firstExercise, secondExercise, thirdExercise);
@@ -85,14 +85,14 @@ public class DataHandler : MonoBehaviour
         playerMovement.enabled = true;
     }
 
-    // Function to calculate calories (You can modify this logic as needed)
+    // Function to calculate calories
     private int CalculateCalories(string foodType, int quantity)
     {
-        // Example logic: 1 gram = 2 calories (adjust based on your needs)
+        
         return quantity * 3;
     }
 
-    // Show summary in the other menu (calories and exercises)
+    // Show summary in the other menu 
     private void ShowSummary(int totalCalories, string cardioExercise, string freeweightsExercise, string machinesExercise)
     {
         summaryCaloriesText.text = "" + totalCalories;
@@ -100,6 +100,13 @@ public class DataHandler : MonoBehaviour
 
     }
 
-    // Save the data to JSON (this saves the entire list of entries)
-    
+    public void CloseUI()
+    {
+
+        menuCanvas.SetActive(false);
+
+    }
+
+
+
 }

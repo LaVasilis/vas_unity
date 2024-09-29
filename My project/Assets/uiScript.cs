@@ -3,9 +3,9 @@ using UnityEngine;
 public class uiScript : MonoBehaviour
 {
     public GameObject canvas;
-    public GameObject summary_canvas; // Drag your canvas object here in the Inspector
+    public GameObject summary_canvas; 
     public KeyCode toggleKey = KeyCode.Alpha1;
-    public KeyCode toggleKeyForSummary = KeyCode.Alpha2; // The key that will toggle the canvas visibility
+    public KeyCode toggleKeyForSummary = KeyCode.Alpha2; 
     public MonoBehaviour playerMovement;
 
     void Start()
@@ -17,7 +17,7 @@ public class uiScript : MonoBehaviour
 
     void Update()
     {
-        // Check if the player presses the toggle key (default: E)
+        
         if (Input.GetKeyDown(toggleKey))
         {
             ToggleCanvas();
@@ -33,7 +33,7 @@ public class uiScript : MonoBehaviour
         bool isCanvasActive = !canvas.activeSelf;
         canvas.SetActive(isCanvasActive);
 
-        // Disable player movement when the canvas is active
+        
         playerMovement.enabled = !isCanvasActive;
     }
 
@@ -42,7 +42,9 @@ public class uiScript : MonoBehaviour
         bool isSummaryCanvasActive = !summary_canvas.activeSelf;
         summary_canvas.SetActive(isSummaryCanvasActive);
 
-        // Disable player movement when the summary canvas is active
+        
         playerMovement.enabled = !isSummaryCanvasActive;
     }
+
+
 }
