@@ -5222,8 +5222,6 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: 600
       m_Image: {fileID: 0}
-    - m_Text: '-'
-      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -14141,8 +14139,6 @@ MonoBehaviour:
     - m_Text: 500
       m_Image: {fileID: 0}
     - m_Text: 600
-      m_Image: {fileID: 0}
-    - m_Text: '-'
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -23307,8 +23303,6 @@ MonoBehaviour:
     - m_Text: 400
       m_Image: {fileID: 0}
     - m_Text: 500
-      m_Image: {fileID: 0}
-    - m_Text: '-'
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

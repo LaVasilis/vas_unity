@@ -55,12 +55,11 @@ public class movement_script : MonoBehaviour
 
     public float interactionDistance = 2f;  // Distance within which the player can interact with the barbell and treadmill
 
-    //public Text interactionText; // Reference to the UI Text
+    
 
     void Start()
     {
-        // Make sure the interaction text is initially hidden
-        //interactionText.enabled = false;
+        
         
     }
 
@@ -104,7 +103,7 @@ public class movement_script : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         bool forwardPressed = Input.GetKey("w");
@@ -160,49 +159,7 @@ public class movement_script : MonoBehaviour
         float distanceToBicycle = Vector3.Distance(playerTrans.position, Bicycle.transform.position);
         isNearBicycle = distanceToBicycle <= interactionDistance;
 
-        /*
-        // Show interaction text for the nearest object
-        if (isNearBarbell && !isHoldingBarbell)
-        {
-            interactionText.text = "Press T to pick up the barbell";
-            interactionText.enabled = true;
-        }
-        else if (isNearTreadmill && !isOnTreadmill)
-        {
-            interactionText.text = "Press T to use the treadmill";
-            interactionText.enabled = true;
-        }
-        else if (isNearDumbell && !isHoldingDumbell)
-        {
-            interactionText.text = "Press T to pick up the dumbbells";
-            interactionText.enabled = true;
-        }
-        else if (isNearMatt && !isOnMatt)
-        {
-            interactionText.text = "Press T to jump";
-            interactionText.enabled = true;
-        }
-        else if (isNearMatt2 && !isOnMatt2)
-        {
-            interactionText.text = "Press T to plank";
-            interactionText.enabled = true;
-        }
-        else if (isNearsumoObj && !isHoldingsumoObj)
-        {
-            interactionText.text = "Press T to pick up the sumo object";
-            interactionText.enabled = true;
-        }
-        else if (isNearBicycle && !isOnBicycle)
-        {
-            interactionText.text = "Press T to use the bicycle";
-            interactionText.enabled = true;
-        }
-        else
-        {
-            // Hide the text if not near any interactable object
-            interactionText.enabled = false;
-        }
-        */
+        
 
 
         if (!isWalking && forwardPressed)
@@ -299,12 +256,12 @@ public class movement_script : MonoBehaviour
         if (!isSumo && interactPressed && !isHoldingsumoObj && isNearsumoObj)
         {
 
-            PickUpSumoObj();  // Start the squat animation with barbell
+            PickUpSumoObj();  
         }
 
         if (isSumo && (interactPressed || forwardPressed || backwardsPressed) && isHoldingsumoObj)
         {
-            DropSumoObj();    // Optional: Drop or release the barbell
+            DropSumoObj();    
         }
 
         if (!isJumping && interactPressed && isNearMatt)
@@ -313,7 +270,7 @@ public class movement_script : MonoBehaviour
             animator.SetBool("isJumping", true);
 
             isOnMatt = true; // Set player on treadmill
-          //  interactionText.enabled = false; // Hide interaction popup when using treadmill
+          
         }
 
         if (isJumping && (interactPressed || forwardPressed || backwardsPressed) && isOnMatt)
@@ -322,7 +279,7 @@ public class movement_script : MonoBehaviour
             animator.SetBool("isJumping", false);
             isOnMatt = false;
             playerTrans.position = new Vector3(-34.93f, 4.9f, -12.947f);
-           // interactionText.enabled = false; // Hide interaction popup
+           
         }
 
         if (!isPlanking && interactPressed && isNearMatt2)
@@ -331,7 +288,7 @@ public class movement_script : MonoBehaviour
             animator.SetBool("isPlanking", true);
 
             isOnMatt2 = true; // Set player on treadmill
-           // interactionText.enabled = false; // Hide interaction popup when using treadmill
+          
         }
 
         if (isPlanking && (interactPressed || forwardPressed || backwardsPressed) && isOnMatt2)
@@ -340,7 +297,7 @@ public class movement_script : MonoBehaviour
             animator.SetBool("isPlanking", false);
             isOnMatt2 = false;
             playerTrans.position = new Vector3(-31.147f, 4.9f, -12.614f);
-           // interactionText.enabled = false; // Hide interaction popup
+           
         }
 
 
@@ -352,7 +309,7 @@ public class movement_script : MonoBehaviour
             animator.SetBool("treadmill", true);
            
             isOnTreadmill = true; // Set player on treadmill
-            //interactionText.enabled = false; // Hide interaction popup when using treadmill
+            
         }
 
         if (treadmill && (interactPressed || forwardPressed || backwardsPressed) && isOnTreadmill)
@@ -361,7 +318,7 @@ public class movement_script : MonoBehaviour
             animator.SetBool("treadmill", false);
             isOnTreadmill = false;
             playerTrans.position = new Vector3(-52.6663f, 4.9f, -19.6006f);
-            //interactionText.enabled = false; // Hide interaction popup
+           
         }
 
 
@@ -371,7 +328,7 @@ public class movement_script : MonoBehaviour
             animator.SetBool("isCycling", true);
 
             isOnBicycle = true; // Set player on treadmill
-            //interactionText.enabled = false; // Hide interaction popup when using treadmill
+            
         }
 
         if (isCycling && (interactPressed || forwardPressed || backwardsPressed) && isOnBicycle)
@@ -380,7 +337,7 @@ public class movement_script : MonoBehaviour
             animator.SetBool("isCycling", false);
             isOnBicycle = false;
             playerTrans.position = new Vector3(-46.73f, 4.9f, -18.87f);
-            //interactionText.enabled = false; // Hide interaction popup
+            
         }
 
 
