@@ -114,6 +114,7 @@ public class movement_script : MonoBehaviour
         bool isWalking = animator.GetBool("isWalking");
         bool isWalkingBackwards = animator.GetBool("isWalkingBackwards");
         bool runPressed = Input.GetKey("left shift");
+        Cursor.lockState = CursorLockMode.None;
 
         bool moveRightPressed = Input.GetKey("d");
         bool moveLeftPressed = Input.GetKey("a");
