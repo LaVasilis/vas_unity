@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.IO;
+using System;
 using Newtonsoft.Json;
 
 public class DataHandler : MonoBehaviour
@@ -31,6 +32,17 @@ public class DataHandler : MonoBehaviour
 
     // Store the entries in a list
     private List<DietExerciseEntry> entries = new List<DietExerciseEntry>();
+
+
+    public Text entryDateText; // Reference to the UI Text
+
+    public void DisplayEntryDate(DateTime entryDate)
+    {
+        // Convert DateTime to string (you can format it as you like)
+        string formattedDate = entryDate.ToString("MMMM dd, yyyy hh:mm tt"); // Example: September 29, 2024 08:30 PM
+        // Assign the formatted date to the text component
+        entryDateText.text = "" + formattedDate;
+    }
 
     // Function to handle "Submit"
     public void SaveEntryAndShowSummary()
@@ -64,8 +76,7 @@ public class DataHandler : MonoBehaviour
         // Add the entry to the list
         entries.Add(newEntry);
 
-        // Save data to JSON
-        SaveDataToJson();
+       
 
         // Display the summary in another menu
         ShowSummary(totalCalories, firstExercise, secondExercise, thirdExercise);
@@ -78,21 +89,16 @@ public class DataHandler : MonoBehaviour
     private int CalculateCalories(string foodType, int quantity)
     {
         // Example logic: 1 gram = 2 calories (adjust based on your needs)
-        return quantity * 2;
+        return quantity * 3;
     }
 
     // Show summary in the other menu (calories and exercises)
-    private void ShowSummary(int totalCalories, string breakfastExercise, string lunchExercise, string dinnerExercise)
+    private void ShowSummary(int totalCalories, string cardioExercise, string freeweightsExercise, string machinesExercise)
     {
-        summaryCaloriesText.text = "Total Calories: " + totalCalories;
-        summaryExerciseText.text = "Exercises: \nCardio: " + breakfastExercise + "\nFree wights: " + lunchExercise + "\nMachines: " + dinnerExercise;
+        summaryCaloriesText.text = "" + totalCalories;
+        summaryExerciseText.text = "Cardio: " + cardioExercise + "\nFree wights: " + freeweightsExercise + "\nMachines: " + machinesExercise;
     }
 
     // Save the data to JSON (this saves the entire list of entries)
-    private void SaveDataToJson()
-    {
-        string json = JsonConvert.SerializeObject(entries, Formatting.Indented);
-        File.WriteAllText(Application.persistentDataPath + "/dietExerciseData.json", json);
-        Debug.Log("Data saved to JSON: " + json);
-    }
+    
 }
