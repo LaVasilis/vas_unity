@@ -15,7 +15,7 @@ public class Resume : MonoBehaviour
 
     public void ResumeFunction(){
         PanelHelp.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked; 
+        // Cursor.lockState = CursorLockMode.Locked; 
 
     }
 
