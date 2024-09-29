@@ -96,7 +96,8 @@ public class DataHandler : MonoBehaviour
     private void ShowSummary(int totalCalories, string cardioExercise, string freeweightsExercise, string machinesExercise)
     {
         summaryCaloriesText.text = "" + totalCalories;
-        summaryExerciseText.text = "Cardio: " + cardioExercise + "\nFree wights: " + freeweightsExercise + "\nMachines: " + machinesExercise;
+        summaryExerciseText.text = "Cardio: " + cardioExercise + "\nFree weights: " + freeweightsExercise + "\nMachines: " + machinesExercise;
+
     }
 
     // Save the data to JSON (this saves the entire list of entries)
