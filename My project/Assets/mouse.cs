@@ -19,14 +19,14 @@ public class mouse : MonoBehaviour
     void Update()
     {
 
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            toggle.isOn = true;
-        }
-        else
-        {
-            toggle.isOn = false;
-        }
+        // if (EventSystem.current.IsPointerOverGameObject())
+        // {
+        //     toggle.isOn = true;
+        // }
+        // else
+        // {
+        //     toggle.isOn = false;
+        // }
 
     }
 }
