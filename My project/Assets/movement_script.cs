@@ -24,6 +24,7 @@ public class movement_script : MonoBehaviour
     public GameObject Dumbell_2;
     public GameObject sumoObj;
     public GameObject Bicycle;
+    public couchInteractable couch;
 
 
 

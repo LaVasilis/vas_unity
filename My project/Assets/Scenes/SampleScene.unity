@@ -698,7 +698,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh46666
+  m_Name: pb_Mesh25464
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7558,7 +7558,7 @@ MonoBehaviour:
     isTrue: 0
   - fact: Do you need a warm up ?
     isTrue: 1
-  factText: {fileID: 0}
+  factText: {fileID: 673508373}
   timeBetweenQuestions: 1
 --- !u!114 &541011900
 MonoBehaviour:
@@ -8252,6 +8252,7 @@ MonoBehaviour:
   Dumbell_2: {fileID: 607630736}
   sumoObj: {fileID: 700376568}
   Bicycle: {fileID: 1718345106}
+  couch: {fileID: 1281272496}
   interactionDistance: 2
 --- !u!114 &578677256
 MonoBehaviour:
@@ -18726,7 +18727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88cf13fab8edade418bec21ca3a8961f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 0}
+  Panel: {fileID: 1802362646}
 --- !u!1 &1286006506
 GameObject:
   m_ObjectHideFlags: 0
@@ -30505,7 +30506,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh44780
+  m_Name: pb_Mesh24828
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33183,7 +33184,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 1059550237}
+  m_Camera: {fileID: 626518611}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
